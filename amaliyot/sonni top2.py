@@ -12,38 +12,8 @@ Created on Wed Aug  9 17:10:20 2023
 @author: MurodjonUser
 """
 import random as r
-
-def qiymat_mosligiga_tekshir(pc_taxmin = 0, user_taxmin = 0, x = 10):
-    if user_taxmin != 0:
-        ishora = True        
-        while ishora:
-            ishora = False
-            try:
-                user_taxmin = int(input("\nTaxminingizni kiriting\n>>"))
-                if (user_taxmin < 1) or (user_taxmin > x):
-                    user_taxmin + 'Xatolik: {TypeError} sodir etish uchun'
-                return user_taxmin
-            except TypeError:
-                print(f"\nIltimos faqat ko'rsatilgan oraliqdagi sonlardan foydalaning!\n\n1dan {x}gacha sonlar oralig'ida son o'yladim, toping?")
-                ishora = True
-            except ValueError:
-                print(f"\nIltimos faqat ko'rsatilgan oraliqdagi sonlardan foydalaning!\n\n1dan {x}gacha sonlar oralig'ida son o'yladim, toping?")
-                ishora = True
-    
-    if pc_taxmin != 0:
-        ishora = True
-        while ishora:
-            ishora = False
-            try:
-                top = input(f"Siz o'ylagan son: {pc_taxmin}\nAgar to'g'ri bo'lsa 'T' | katta bo'lsa '+' | kichik bo'lsa '-'  ??\n>>".lower())
-                if top == 't' or top == '+' or top == '-':
-                    return top
-                else:
-                    top + 1 + "Xatolikni aniqlash uchun yozdim"
-            except TypeError:
-                print("Iltimos faqat ko'rsatilgan belgilardan foydalaning!\n")
-                ishora = True
-
+import os
+import time
 def sonni_top_user(x=10):
     """
     Foydalanuvchi sonni topadi, funksiyasi
@@ -76,7 +46,15 @@ def sonni_top_pc(x=10):
     ishora = True
     while ishora:
         taxminlar_soni += 1
+        if xmin > xmax or xmin < 1 or xmax > x:
+            taxminlar_soni = 0
+            break
+        # try:
         pc_taxmin = r.randint(xmin, xmax)
+        # except TypeError:
+            # print("Siz meni aldadingiz! Aldashlik musulmon kishiga hos emas, Brodar!")
+            # return 0
+            # break
         top = qiymat_mosligiga_tekshir(pc_taxmin = pc_taxmin, x = x)
         if top == 't':
             print(f"Men topdim. {taxminlar_soni}ta urinishda siz o'ylagan sonni topdim\n")
@@ -86,6 +64,37 @@ def sonni_top_pc(x=10):
         else:
             xmax = pc_taxmin - 1
     return taxminlar_soni
+
+def qiymat_mosligiga_tekshir(pc_taxmin = 0, user_taxmin = 0, x = 10):
+    if user_taxmin != 0:
+        ishora = True        
+        while ishora:
+            ishora = False
+            try:
+                user_taxmin = int(input("\nTaxminingizni kiriting\n>>"))
+                if (user_taxmin < 1) or (user_taxmin > x):
+                    user_taxmin + 'Xatolik: {TypeError} sodir etish uchun'
+                return user_taxmin
+            except TypeError:
+                print(f"\nIltimos faqat ko'rsatilgan oraliqdagi sonlardan foydalaning!\n\n1dan {x}gacha sonlar oralig'ida son o'yladim, toping?")
+                ishora = True
+            except ValueError:
+                print(f"\nIltimos faqat ko'rsatilgan oraliqdagi sonlardan foydalaning!\n\n1dan {x}gacha sonlar oralig'ida son o'yladim, toping?")
+                ishora = True
+    
+    if pc_taxmin != 0:
+        ishora = True
+        while ishora:
+            ishora = False
+            try:
+                top = input(f"Siz o'ylagan son: {pc_taxmin}\nAgar to'g'ri bo'lsa 'T' | katta bo'lsa '+' | kichik bo'lsa '-'  ??\n>>".lower())
+                if top == 't' or top == '+' or top == '-':
+                    return top
+                else:
+                    top + 1 + "Xatolikni aniqlash uchun yozdim"
+            except TypeError:
+                print("Iltimos faqat ko'rsatilgan belgilardan foydalaning!\n")
+                ishora = True
 
 def davom_et(davom = 1):
     ishora = True
@@ -117,7 +126,9 @@ def play(x=10):
             print("\nEndi siz son o'ylang, men uni topaman!")
             input("Biron sonni o'ylagan bo'lsangiz, ENTERni bosing\n>>")
             taxminlar_soni_pc = sonni_top_pc(xmax)
-            if taxminlar_soni_pc > taxminlar_soni_user:
+            if taxminlar_soni_pc == 0:
+                print("\n\nSIZ '+','-' ISHORALARNI KIRITISHDA XATOLIKKA YO'L QO'YDINGIZ YOKI...\n\nSiz meni aldadingiz! Aldashlik musulmon kishiga hos emas, Brodar!\n\nQaytadan, ", end = '')
+            elif taxminlar_soni_pc > taxminlar_soni_user:
                 print(f"Siz sonni topish bo'yicha meni yutdingiz, qoyil!")
             elif taxminlar_soni_pc < taxminlar_soni_user:
                 print("Men g'olibman. Meni yutish ancha-munchasiga emas!")
@@ -128,5 +139,10 @@ def play(x=10):
             print("\nIltimos musbat va butun sonlardan foydalaning\n")
             pass
 
-
 play()
+time.sleep(5)
+os.system("cls")
+print(runcell(0, 'C:/Github files/MurodjonYusupov/amaliyot/sonni top2.py')10)
+print("O'yin tugadi(:")
+
+
