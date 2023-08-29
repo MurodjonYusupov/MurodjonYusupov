@@ -130,10 +130,22 @@ class Talaba(Shaxs):
         talaba = f"{self.ism.title()} {self.familiya.title()}, "
         talaba += f"{self.tuniversitet.title()}da {self.tbosqich}-kursda o'qiydi!"
         return talaba
+    def __lt__(self, y):
+        return self.tbosqich < y.tbosqich
+    
+    def set_bosqich(self,bosqich):
+        self.tbosqich = bosqich
     
     @classmethod
     def get_talabalar_soni(cls):
         return cls.__talabalar
+
+class Fan:
+    """Fan klasi"""
+    def __init__(self, nomi):
+        self.fannomi = nomi
+        self.sub_students = []
+    def fanga
 
 
 shaxs1 = Shaxs("murodjon", "yusupov", 1997, "andijon")
